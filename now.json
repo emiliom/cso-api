@@ -3,7 +3,7 @@
   "env": {
     "SQL_USERNAME": "@cso-sql-username",
     "SQL_PASSWORD": "@cso-sql-password",
-    "SQL_HOSTNAME": "@cso-sql-hostname",
+    "SQL_HOSTNAME": "@cso-sql-hostname"
   },
   "builds": [
     { "src": "*.js", "use": "@now/node" }
