@@ -6,7 +6,7 @@
     "SQL_HOSTNAME": "@cso-sql-hostname"
   },
   "builds": [
-    { "src": "*.js", "use": "@now/node" }
+    { "src": "src/observations.js", "use": "@now/node" }
   ],
   "routes": [
     { "src": "/obs", "dest": "src/observations.js" }
