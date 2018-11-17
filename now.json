@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "env": {
+    "MY_KEY": "this is the value",
+    "SECRET": "@my-secret-name"
+  },
+  "builds": [
+    { "src": "*.js", "use": "@now/node" },
+  ],
+  "routes": [
+    { "src": "/obs", "dest": "src/observations.js" },
+  ]
+}

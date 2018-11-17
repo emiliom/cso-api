@@ -1,0 +1,8 @@
+{
+  "name": "cso-api-next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jonahjoughin/cso-api-next.git",
+  "author": "Jonah Joughin <jonah@jough.in>",
+  "license": "MIT"
+}
