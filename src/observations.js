@@ -11,7 +11,12 @@
 //     LIMIT $5
 //     `
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 module.exports = async (req, res) => {
+  await sleep(5000);
   res.end("Hello, World!");
 }
 
