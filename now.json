@@ -5,9 +5,9 @@
     "SECRET": "@my-secret-name"
   },
   "builds": [
-    { "src": "*.js", "use": "@now/node" },
+    { "src": "*.js", "use": "@now/node" }
   ],
   "routes": [
-    { "src": "/obs", "dest": "src/observations.js" },
+    { "src": "/obs", "dest": "src/observations.js" }
   ]
 }
