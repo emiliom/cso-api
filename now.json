@@ -11,6 +11,6 @@
   ],
   "routes": [
     { "src": "/obs", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "src/observations.js" },
-    { "src": "/snapshots", "dest": "src/snapshots/package.json"}
+    { "src": "/snapshots", "dest": "src/snapshots"}
   ]
 }
