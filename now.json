@@ -9,6 +9,6 @@
     { "src": "src/observations.js", "use": "@now/node" }
   ],
   "routes": [
-    { "src": "/obs", "dest": "src/observations.js" }
+    { "src": "/obs", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "src/observations.js" }
   ]
 }
