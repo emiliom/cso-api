@@ -1,8 +1,9 @@
 {
   "version": 2,
   "env": {
-    "MY_KEY": "this is the value",
-    "SECRET": "@my-secret-name"
+    "SQL_USERNAME": "@cso-sql-username",
+    "SQL_PASSWORD": "@cso-sql-password",
+    "SQL_HOSTNAME": "@cso-sql-hostname",
   },
   "builds": [
     { "src": "*.js", "use": "@now/node" }
