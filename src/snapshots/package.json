@@ -4,6 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "now-build": "mkdir dist && curl https://api.communitysnowobs.org/obs >> dist/observations.geojson"
+    "now-build": [
+      "mkdir dist",
+      "&& curl https://api.communitysnowobs.org/obs >> dist/observations.geojson"
+    ]
   }
 }
