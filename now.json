@@ -20,6 +20,6 @@
   ],
   "routes": [
     { "src": "/obs", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "src/observations.js" },
-    { "src": "/snapshots/obs", "dest": "src/snapshots/observations.geojson"}
+    { "src": "/snapshots/obs", "dest": "observations.geojson"}
   ]
 }
