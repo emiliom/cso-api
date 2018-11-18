@@ -18,3 +18,10 @@ observations({limit: 'ALL', format: 'geojson'})
     stream.write(results);
     stream.end();
   })
+
+observations({limit: 'ALL', format: 'json'})
+  .then(results => {
+    const stream = fs.createWriteStream('dist/snapshots/json.txt');
+    stream.write(results);
+    stream.end();
+  })
