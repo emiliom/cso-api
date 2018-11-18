@@ -159,4 +159,4 @@ const parseProviders = providers => providers ? providers.split(",") : null
 const parseDate = date => date instanceof Date && !isNaN(date) ? date : null
 const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? "ALL" : (Number(limit) || 100)
 const parsePage = page => Math.max(Number(page), 1)
-const parseOffset = (limit, page) => (parsePage(page) - 1) * pargeOffset(limit) || null
+const parseOffset = (limit, page) => (parsePage(page) - 1) * pageOffset(limit) || null
