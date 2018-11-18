@@ -1,4 +1,3 @@
-const { parse } = require("url");
 const pg = require('pg');
 
 const pgConfig = {
