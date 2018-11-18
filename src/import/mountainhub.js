@@ -1,4 +1,3 @@
-const pg = require('pg');
 const axios = require("axios");
 const { generateId } = require("./utils")
 
