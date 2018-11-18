@@ -19,8 +19,8 @@
     { "src": "package.json", "use": "@now/static-build"}
   ],
   "routes": [
-    { "src": "/obs", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations.js" },
-    { "src": "/obs/snapshots/geojson", "dest": "/observations.geojson"},
-    { "src": "/obs/snapshots/csv", "dest": "/observations.csv"}
+    { "src": "/api", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations.js" },
+    { "src": "/api/snapshots/geojson", "dest": "/observations.geojson"},
+    { "src": "/api/snapshots/csv", "dest": "/observations.csv"}
   ]
 }
