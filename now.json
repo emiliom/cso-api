@@ -22,12 +22,12 @@
   ],
   "routes": [
     { "src": "/", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/api/index.js" },
-    { "src": "/import", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/import/index.js" },
+    { "src": "/import", "dest": "/src/import/index.js" },
     { "src": "/snapshots/geojson", "dest": "/snapshots/geojson.txt"},
     { "src": "/snapshots/csv", "dest": "/snapshots/csv.txt"},
     { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
     { "src": "/docs", "dest":"/docs/index.html"}
   ],
   "alias": ["cso.jough.in"],
-  "regions": ["bru"]
+  "regions": ["bru", "sfo", "gru", "iad"]
 }
