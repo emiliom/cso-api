@@ -52,8 +52,6 @@ const observations = (req, res) => {
     .then(results => res.end(results))
 }
 
-module.exports = observations
-
 const format = (results, type) => {
   switch(type) {
     case "csv":
@@ -119,3 +117,5 @@ const parseDate = date => {
 const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? "ALL" : (Number(limit) || 100)
 const parsePage = page => Math.max(Number(page), 1)
 const parseOffset = (limit, page) => (parsePage(page) - 1) * parseLimit(limit) || null
+
+module.exports = observations
