@@ -37,7 +37,6 @@ const insertObservations = async function (observations) {
   try {
     await pgPool.query('BEGIN');
     for (let d of observations) {
-      console.log(d)
       await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
     }
     await pgPool.query('COMMIT');

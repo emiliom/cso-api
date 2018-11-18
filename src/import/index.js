@@ -1,5 +1,5 @@
 const mh = require('./mountainhub')
-const sp = requier('./snowpilot')
+const sp = require('./snowpilot')
 const { retrieveObservations, insertObservations } = require('./observations')
 
 module.exports = (req, res) => {
