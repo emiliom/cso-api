@@ -80,7 +80,7 @@ const formatJSON = results => {
   }, null, 2)
 }
 const formatGeoJSON = results => {
-  eturn JSON.stringify({
+  return JSON.stringify({
     type: "FeatureCollection",
     features: results.rows.map(row => ({
       type: "Feature",
