@@ -1,5 +1,5 @@
 const { parse } = require("url");
-const getObservations = require('./observations')
+const getObservations = require('./getObservations')
 
 module.exports = (req, res) => {
   const queryParams = parse(req.url, true).query;
