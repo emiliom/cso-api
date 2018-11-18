@@ -1,4 +1,5 @@
 const { parse } = require("url");
+const __observations = require('./snapshots/__observations')
 const pg = require('pg');
 
 const pgConfig = {
@@ -23,26 +24,26 @@ const query = `
 
 let pgPool;
 
-const __observations = async (queryParams) => {
-
-  const pgParams = [
-    parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
-    parseProviders(queryParams.providers), // Providers
-    parseDate(queryParams.startDate), // Start Date
-    parseDate(queryParams.endDate), // End Date
-    parseLimit(queryParams.limit), // Limit
-    parseOffset(queryParams.limit, queryParams.page) // Offset
-  ]
-
-  console.log(pgParams)
-
-  if (!pgPool) {
-    pgPool = new pg.Pool(pgConfig);
-  }
-
-  results = await pgPool.query(query, pgParams)
-  return format(results, queryParams.format);
-}
+// const __observations = async (queryParams) => {
+//
+//   const pgParams = [
+//     parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
+//     parseProviders(queryParams.providers), // Providers
+//     parseDate(queryParams.startDate), // Start Date
+//     parseDate(queryParams.endDate), // End Date
+//     parseLimit(queryParams.limit), // Limit
+//     parseOffset(queryParams.limit, queryParams.page) // Offset
+//   ]
+//
+//   console.log(pgParams)
+//
+//   if (!pgPool) {
+//     pgPool = new pg.Pool(pgConfig);
+//   }
+//
+//   results = await pgPool.query(query, pgParams)
+//   return format(results, queryParams.format);
+// }
 
 const observations = (req, res) => {
 
