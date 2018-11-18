@@ -24,7 +24,6 @@ const query = `
 let pgPool;
 
 const __observations = async (queryParams) => {
-console.log("Observations!")
   const pgParams = [
     parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
@@ -33,8 +32,6 @@ console.log("Observations!")
     parseLimit(queryParams.limit), // Limit
     parseOffset(queryParams.limit, queryParams.page) // Offset
   ]
-
-  console.log(pgParams)
 
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
@@ -96,7 +93,6 @@ const formatGeoJSON = results => {
 const parseRegion = (str) => {
   if (!str) return null;
   const polygon = str.split("_").map(x => x.replace(",", " "));
-  console.log(polygon)
   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
 };
 
@@ -105,7 +101,6 @@ const parseBBox = (str) => {
   if (!str) return null;
   const [min_long,max_lat,max_long,min_lat] = str.split(",");
   const polygon = [min_long + " " + min_lat, min_long + " " + max_lat, max_long + " " + max_lat, max_long + " " + min_lat]
-  console.log(polygon)
   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
 }
 
