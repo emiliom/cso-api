@@ -4,7 +4,7 @@ const ONE_MONTH = 2592000000;
 
 const retrieveObservations = async function(providers) {
   const data = await Promise.all(providers.map(provider => __retrieveObservation(provider)))
-  return data[0]
+  return [].concat.apply([], data)
 }
 
 const __retrieveObservation = async function(provider) {
