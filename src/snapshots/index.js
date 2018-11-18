@@ -1,3 +1,5 @@
+const pg = require('pg');
+
 const request = require("request");
 const observations = require("../__observations.js")
 const fs = require("fs")
