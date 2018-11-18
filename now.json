@@ -29,5 +29,5 @@
     { "src": "/docs", "dest":"/docs/index.html"}
   ],
   "alias": ["cso.jough.in"],
-  "regions": ["all"]
+  "regions": ["bru"]
 }
