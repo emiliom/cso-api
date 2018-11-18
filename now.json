@@ -26,8 +26,8 @@
     { "src": "/snapshots/geojson", "dest": "/snapshots/geojson.txt"},
     { "src": "/snapshots/csv", "dest": "/snapshots/csv.txt"},
     { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
-    { "src": "/docs", "dest":"/docs/index.html"}
+    { "src": "/docs/v1", "dest":"/docs/v1.html"}
   ],
   "alias": ["cso.jough.in"],
-  "regions": ["bru", "sfo", "gru", "iad"]
+  "regions": ["all"]
 }
