@@ -3,8 +3,7 @@ const observations = require("./__observations")
 const fs = require("fs")
 
 fs.mkdirSync("dist")
-fs.mkdirSync("dist/api")
-fs.mkdirSync("dist/api/snapshots")
+fs.mkdirSync("dist/snapshots")
 
 observations({limit: 'ALL', format: 'csv'})
   .then(results => {
