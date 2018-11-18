@@ -16,13 +16,12 @@
   },
   "builds": [
     { "src": "src/observations.js", "use": "@now/node" },
-    { "src": "package.json", "use": "@now/static-build"},
-    { "src": "src/docs.md", "use": "@now/md"}
+    { "src": "package.json", "use": "@now/static-build"}
   ],
   "routes": [
     { "src": "/api", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations.js" },
     { "src": "/api/snapshots/geojson", "dest": "/api/snapshots/geojson"},
     { "src": "/api/snapshots/csv", "dest": "/csv"},
-    { "src": "/api/docs", "dest":"/docs.html"}
+    { "src": "/api/docs", "dest":"/api/docs.html"}
   ]
 }
