@@ -114,7 +114,7 @@ const parseDate = date => {
   date = new Date(date)
   return date instanceof Date && !isNaN(date) ? date : null
 }
-const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? "ALL" : (Number(limit) || 100)
+const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? null : (Number(limit) || 100)
 const parsePage = page => Math.max(Number(page), 1)
 const parseOffset = (limit, page) => (parsePage(page) - 1) * parseLimit(limit) || null
 
