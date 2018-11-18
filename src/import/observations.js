@@ -29,7 +29,7 @@ const query = `
   ON CONFLICT DO NOTHING
 `
 
-let pgPool
+let pgPool;
 
 const insertObservations = async function (observations) {
   if (!pgPool) {
