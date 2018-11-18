@@ -14,8 +14,8 @@ const query = `
     ($1::text is null or location && ST_Polygon(ST_GeomFromText($1), 4326)) AND
     ($2::varchar[] is null or source = ANY ($2::varchar[])) AND
     elevation >= 0 AND
-    ($3 is null or timestamp > $3) AND
-    ($4 is null or timestamp < $4)
+    ($3::timestamp is null or timestamp > $3) AND
+    ($4::timestamp is null or timestamp < $4)
     ORDER BY id
     OFFSET $6
     LIMIT $5
