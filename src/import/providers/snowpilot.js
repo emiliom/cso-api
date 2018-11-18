@@ -1,5 +1,4 @@
-
-const { generateId } = require("./utils")
+const { generateId } = require("../utils")
 const request = require('request-promise');
 const parseString = require('xml2js').parseString;
 

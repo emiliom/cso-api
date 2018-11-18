@@ -1,5 +1,5 @@
 const axios = require("axios");
-const { generateId } = require("./utils")
+const { generateId } = require("../utils")
 
 const BASE_URL = 'https://api.mountainhub.com/timeline';
 const HEADER = { 'Accept-version': '1' };

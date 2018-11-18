@@ -27,5 +27,6 @@
     { "src": "/snapshots/csv", "dest": "/snapshots/csv.txt"},
     { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
     { "src": "/docs", "dest":"/docs.html"}
-  ]
+  ],
+  "alias": ["cso.jough.in"]
 }
