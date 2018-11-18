@@ -21,7 +21,6 @@ const __withElevationBatch = async function(data) {
   }
   const response = await axios.get(BASE_ELEVATION_URL, {params: params});
   console.log(response.data)
-  console.log(response.data.results)
   const results = data.map((x,i) => (Object.assign(x, {elevation: response.data.results[i].elevation})))
   return results
 }
