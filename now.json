@@ -16,7 +16,7 @@
   },
   "builds": [
     { "src": "src/observations.js", "use": "@now/node" },
-    { "src": "src/snapshots/package.json", "use": "@now/static-build"}
+    { "src": "package.json", "use": "@now/static-build"}
   ],
   "routes": [
     { "src": "/obs", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "src/observations.js" },
