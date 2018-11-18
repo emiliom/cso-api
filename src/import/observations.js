@@ -1,4 +1,5 @@
 const { withElevation } = require('./utils')
+const pg = require('pg');
 const ONE_MONTH = 2592000000;
 
 const retrieveObservations = async function(providers) {
