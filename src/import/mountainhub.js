@@ -1,6 +1,6 @@
 const pg = require('pg');
 const axios = require("axios");
-const { generateId, withElevation } = require("./utils")
+const { generateId } = require("./utils")
 
 const BASE_URL = 'https://api.mountainhub.com/timeline';
 const HEADER = { 'Accept-version': '1' };
@@ -28,7 +28,7 @@ const parseData = (record) => {
   try {
     const format = {
       author_name: record.actor.full_name || record.actor.fullName,
-      id: hash(record.observation._id),
+      id: generateId(record.observation._id),
       timestamp: new Date(record.observation.reported_at),
       lat: record.observation.location[1],
       long: record.observation.location[0],
