@@ -45,9 +45,10 @@ module.exports = (req, res) => {
   pgPool.query(query, pgParams, (err, results) => {
     if (err) {
       console.error(err);
-      res.status(500).send(err);
+      res.statusCode = 500
+      res.end(err);
     } else {
-      res.send(JSON.stringify(results));
+      res.end(JSON.stringify(results));
     }
   })
 }
