@@ -20,8 +20,8 @@
   ],
   "routes": [
     { "src": "/", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations.js" },
-    { "src": "/snapshots/geojson", "dest": "/api/snapshots/geojson"},
-    { "src": "/snapshots/csv", "dest": "/csv"},
-    { "src": "/docs", "dest":"/api/docs.html"}
+    { "src": "/snapshots/geojson", "dest": "/snapshots/geojson"},
+    { "src": "/snapshots/csv", "dest": "/snapshots/csv"},
+    { "src": "/docs", "dest":"/docs.html"}
   ]
 }

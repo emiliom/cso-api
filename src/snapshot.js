@@ -8,14 +8,14 @@ fs.mkdirSync("dist/api/snapshots")
 
 observations({limit: 'ALL', format: 'csv'})
   .then(results => {
-    const stream = fs.createWriteStream('dist/api/snapshots/csv');
+    const stream = fs.createWriteStream('dist/snapshots/csv');
     stream.write(results);
     stream.end();
   })
 
 observations({limit: 'ALL', format: 'geojson'})
   .then(results => {
-    const stream = fs.createWriteStream('dist/api/snapshots/geojson');
+    const stream = fs.createWriteStream('dist/snapshots/geojson');
     stream.write(results);
     stream.end();
   })
