@@ -26,9 +26,7 @@ let pgPool;
 module.exports = (req, res) => {
 
   console.log(req.url)
-  console.log(req.params)
-  console.log(req.query)
-  const { queryParams } = parse(req.url, true);
+  const queryParams = parse(req.url, true);
   console.log(queryParams)
 
   const pgParams = [
