@@ -1,5 +1,5 @@
 const request = require("request");
-const observations = require("./__observations.js")
+const observations = require("./__observations")
 const fs = require("fs")
 
 fs.mkdirSync("dist")

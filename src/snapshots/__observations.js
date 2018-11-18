@@ -24,7 +24,7 @@ const query = `
 let pgPool;
 
 const __observations = async (queryParams) => {
-
+console.log("Observations!")
   const pgParams = [
     parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
