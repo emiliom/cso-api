@@ -49,5 +49,5 @@ const __retrieveObservation = async function(provider) {
 
 module.exports = {
   retrieveObservations,
-  insertObservations
+  // insertObservations
 }
