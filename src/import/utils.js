@@ -25,11 +25,7 @@ const __withElevationBatch = async (data) => {
   return results
 }
 
-let pgPool;
-
-const
-
- module.exports = {
-   generateId,
-   withElevation
- }
+module.exports = {
+  generateId,
+  withElevation
+}
