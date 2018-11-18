@@ -22,7 +22,10 @@ const query = `
 
 let pgPool;
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
+
+  console.log(req)
+  console.log(req.bbox)
 
   const pgParams = [
     formatBBox(req.query.bbox) || formatReion(req.query.region), // Region
