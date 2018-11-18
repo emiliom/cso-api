@@ -6,6 +6,14 @@
     "SQL_HOSTNAME": "@cso-sql-hostname",
     "SQL_DATABASE": "@cso-sql-database"
   },
+  "build": {
+    "env": {
+      "SQL_USERNAME": "@cso-sql-username",
+      "SQL_PASSWORD": "@cso-sql-password",
+      "SQL_HOSTNAME": "@cso-sql-hostname",
+      "SQL_DATABASE": "@cso-sql-database"
+    }
+  },
   "builds": [
     { "src": "src/observations.js", "use": "@now/node" },
     { "src": "src/snapshots/package.json", "use": "@now/static-build"}
