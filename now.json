@@ -21,8 +21,8 @@
   ],
   "routes": [
     { "src": "/api", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations.js" },
-    { "src": "/api/snapshots/geojson", "dest": "/observations.geojson"},
-    { "src": "/api/snapshots/csv", "dest": "/observations.csv"},
+    { "src": "/api/snapshots/geojson", "dest": "/api/snapshots/geojson"},
+    { "src": "/api/snapshots/csv", "dest": "/csv"},
     { "src": "/api/docs", "dest":"/docs.md"}
   ]
 }

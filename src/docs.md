@@ -3,6 +3,12 @@
 Functions running CSO's serverless [API](https://api.communitysnowobs.org/obs)
 
 ## Parameters
+- bbox: `string` - `<west,north,east,south>`
+- startDate: `string` - `YYYY-MM-DD`
+- endDate: `string` - `YYYY-MM-DD`
+- format: `string` - one of `geojson`, `csv`, `json`
+- limit: `integer`
+- page: `integer`
 
 ## Example API calls
 
