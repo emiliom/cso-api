@@ -25,9 +25,7 @@ let pgPool;
 
 module.exports = (req, res) => {
 
-  console.log(req.url)
   const queryParams = parse(req.url, true);
-  console.log(queryParams)
 
   const pgParams = [
     formatBBox(queryParams.bbox) || formatRegion(queryParams.region), // Region
@@ -37,6 +35,8 @@ module.exports = (req, res) => {
     parseLimit(queryParams.limit), // Limit
     parseOffset(queryParams.limit, queryParams.page) // Offset
   ]
+
+  console.log(pgParams)
 
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
@@ -48,9 +48,49 @@ module.exports = (req, res) => {
       res.statusCode = 500
       res.end(err);
     } else {
-      res.end(JSON.stringify(results));
+      res.end(format(results, queryParams.format));
     }
   })
+}
+
+const format = (results, type) => {
+  switch(type) {
+    case "csv":
+      return formatCSV(results)
+    case "json":
+      return formatJSON(results)
+    default:
+      return formatGeoJSON(results)
+  }
+}
+
+const formatCSV = results => {
+  if (results.rows.length == 0) {
+    return "No features"
+  }
+  let output = Object.keys(results.rows[0]).map(value => String(value)).join(",") + "\n"
+  return results.rows.reduce((str, next) => {
+      str += Object.values(next).map(value => String(value)).join(",") + '\n';
+      return str;
+  }, output);
+}
+const formatJSON = results => {
+  return JSON.stringify({
+    features: results.rows
+  }, null, 2)
+}
+const formatGeoJSON = results => {
+  eturn JSON.stringify({
+    type: "FeatureCollection",
+    features: results.rows.map(row => ({
+      type: "Feature",
+      properties: Object.assign({}, row, { lat: undefined, long: undefined}),
+      geometry: {
+        type: "Point",
+        coordinates: [row.long, row.lat]
+      }
+    }))
+  }, null, 2)
 }
 
 // exports.handler = async function(event, context, callback) {
