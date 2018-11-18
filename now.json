@@ -28,5 +28,6 @@
     { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
     { "src": "/docs", "dest":"/docs/index.html"}
   ],
-  "alias": ["cso.jough.in"]
+  "alias": ["cso.jough.in"],
+  "regions": ["all"]
 }
