@@ -24,8 +24,8 @@ let pgPool;
 
 module.exports = (req, res) => {
 
-  console.log(req)
-  console.log(req.bbox)
+  console.log(req.params)
+  console.log(req.query)
 
   const pgParams = [
     formatBBox(req.query.bbox) || formatReion(req.query.region), // Region
