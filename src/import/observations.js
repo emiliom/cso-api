@@ -13,8 +13,6 @@ const __retrieveObservation = async function(provider) {
   return data
 }
 
-
-
 const pgConfig = {
   max: 1,
   user: process.env.SQL_USERNAME,

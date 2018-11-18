@@ -1,5 +1,5 @@
 const mh = require('./mountainhub')
-// const { retrieveObservations, insertObservations } = require('./observations')
+const obs = require('./observations')
 
 module.exports = (req, res) => {
   // const providers = [mh]
