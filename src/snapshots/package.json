@@ -7,7 +7,6 @@
     "now-build": "node index.js"
   },
   "dependencies": {
-    "pg": "^7.6.1",
     "request": "^2.88.0"
   }
 }
