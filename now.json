@@ -16,7 +16,6 @@
   },
   "builds": [
     { "src": "src/observations.js", "use": "@now/node" },
-    { "src": "src/test.js", "use": "@now/node" },
     { "src": "src/snapshots/package.json", "use": "@now/static-build"}
   ],
   "routes": [
