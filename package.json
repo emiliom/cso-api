@@ -6,7 +6,7 @@
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
-    "now-build": "node snapshots.js"
+    "now-build": "node src/snapshots.js"
   },
   "dependencies": {
     "pg": "^7.6.1",
