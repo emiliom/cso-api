@@ -6,7 +6,7 @@ fs.mkdirSync("dist")
 
 observations({limit: 'ALL', format: 'csv'})
   .then(results => {
-    const stream = fs.createWriteStream('dist/observations.csv');
+    const stream = fs.createWriteStream('dist/observations-csv.csv');
     stream.write(results);
     stream.end();
   })
