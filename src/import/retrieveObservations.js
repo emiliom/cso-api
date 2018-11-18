@@ -1,4 +1,4 @@
-const { withElevation } = require('./utils')
+const withElevation = require('./withElevation')
 const ONE_MONTH = 2592000000;
 
 module.exports = async function(providers) {
