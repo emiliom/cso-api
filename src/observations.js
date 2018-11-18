@@ -1,5 +1,5 @@
-const pg = require('pg');
 const { parse } = require("url");
+const pg = require('pg');
 
 const pgConfig = {
   max: 1,
