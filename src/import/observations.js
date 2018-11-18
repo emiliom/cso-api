@@ -30,24 +30,25 @@ const query = `
 
 let pgPool;
 
-// const insertObservations = async function (observations) {
-//   if (!pgPool) {
-//     pgPool = new pg.Pool(pgConfig);
-//   }
-//   try {
-//     await pgPool.query('BEGIN');
-//     for (let d of observations) {
-//       console.log(d)
-//       await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
-//     }
-//     await pgPool.query('COMMIT');
-//   } catch (e) {
-//     await pgPool.query('ROLLBACK')
-//     return "Error"
-//   }
-//   return "Success"
+const insertObservations = async function (observations) {
+  if (!pgPool) {
+    pgPool = new pg.Pool(pgConfig);
+  }
+  try {
+    await pgPool.query('BEGIN');
+    for (let d of observations) {
+      console.log(d)
+      await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
+    }
+    await pgPool.query('COMMIT');
+  } catch (e) {
+    await pgPool.query('ROLLBACK')
+    return "Error"
+  }
+  return "Success"
+}
 
 module.exports = {
   retrieveObservations,
-  // insertObservations
+  insertObservations
 }
