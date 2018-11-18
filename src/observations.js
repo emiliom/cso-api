@@ -23,12 +23,10 @@ const query = `
 
 let pgPool;
 
-module.exports = (req, res) => {
+const __observations = async (queryParams) => {
 
-  const queryParams = parse(req.url, true).query;
-  console.log(queryParams)
   const pgParams = [
-    formatBBox(queryParams.bbox) || formatRegion(queryParams.region), // Region
+    parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
     parseDate(queryParams.startDate), // Start Date
     parseDate(queryParams.endDate), // End Date
@@ -42,16 +40,19 @@ module.exports = (req, res) => {
     pgPool = new pg.Pool(pgConfig);
   }
 
-  pgPool.query(query, pgParams, (err, results) => {
-    if (err) {
-      console.error(err);
-      res.statusCode = 500
-      res.end(err);
-    } else {
-      res.end(format(results, queryParams.format));
-    }
-  })
+  results = await pgPool.query(query, pgParams) => {
+  return format(results, queryParams.format);
 }
+
+const observations = (req, res) => {
+
+  const queryParams = parse(req.url, true).query;
+
+  __observations(queryParams)
+    .then(results => res.end(results))
+}
+
+module.exports = observations
 
 const format = (results, type) => {
   switch(type) {
@@ -93,102 +94,16 @@ const formatGeoJSON = results => {
   }, null, 2)
 }
 
-// exports.handler = async function(event, context, callback) {
-//   // Parse params and replace with defaults
-//   const queryParams = event.queryStringParameters || {};
-//   const params = {
-//     region: format_region(queryParams.region),
-//     bbox: format_bbox(queryParams.bbox),
-//     src: safe_split(queryParams.src),
-//     limit: Math.min(Number(queryParams.limit) || 100, 10000),
-//     page: Number(queryParams.page) || 1,
-//     start_date: new Date(queryParams.start_date || "2016-01-01"),
-//     end_date: new Date(queryParams.end_date || new Date().getTime())
-//   };
-//
-//   // Create Postgres connection
-//   const client = new pg.Client({
-//     user: process.env.DB_USER,
-//     host: process.env.DB_HOST,
-//     database: process.env.DB_NAME,
-//     password: process.env.DB_PASS,
-//     port: 5432,
-//   })
-//   await client.connect();
-//   // Execute query
-//   const results = await client.query(q, [params.bbox || params.region, params.src, params.start_date, params.end_date, params.limit, params.page]);
-//   await client.end();
-//
-//   // Send response
-//   const response = {
-//     statusCode: 200,
-//     headers: {
-//         "Access-Control-Allow-Origin" : "*", // Required for CORS support to work
-//         "Access-Control-Allow-Credentials" : true // Required for cookies, authorization headers with HTTPS
-//     },
-//     body: format(results, queryParams.format || "json"),
-//   };
-//
-//   callback(null, response);
-//   return;
-//
-// };
-//
-// const format = (results, format) => {
-//   switch (format) {
-//     case "geojson":
-//       return format_geojson(results)
-//     case "csv":
-//       return format_csv(results)
-//     default:
-//       return format_json(results)
-//   }
-// }
-//
-// const format_json = (results) => {
-//   return JSON.stringify({
-//     features: results.rows
-//   }, null, 2)
-//
-// }
-//
-// const format_geojson = (results) => {
-//   return JSON.stringify({
-//     type: "FeatureCollection",
-//     features: results.rows.map(row => ({
-//       type: "Feature",
-//       properties: Object.assign({}, row, { lat: undefined, long: undefined}),
-//       geometry: {
-//         type: "Point",
-//         coordinates: [row.long, row.lat]
-//       }
-//     }))
-//   }, null, 2)
-// }
-//
-// const format_csv = (results) => {
-//   if (results.rows.length == 0) {
-//     return "No features"
-//   }
-//   else {
-//     let output = Object.keys(results.rows[0]).map(value => String(value)).join(",") + "\n"
-//     return results.rows.reduce((str, next) => {
-//         str += Object.values(next).map(value => String(value)).join(",") + '\n';
-//         return str;
-//     }, output);
-//   }
-// }
-//
-// // Format list of coordinates as linestring
-const formatRegion = (str) => {
+// Format list of coordinates as linestring
+const parseRegion = (str) => {
   if (!str) return null;
   const polygon = str.split("_").map(x => x.replace(",", " "));
   console.log(polygon)
   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
 };
 
-// // Format bounding box as linestring
-const formatBBox = (str) => {
+// Format bounding box as linestring
+const parseBBox = (str) => {
   if (!str) return null;
   const [min_long,max_lat,max_long,min_lat] = str.split(",");
   const polygon = [min_long + " " + min_lat, min_long + " " + max_lat, max_long + " " + max_lat, max_long + " " + min_lat]
