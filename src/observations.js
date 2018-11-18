@@ -1,23 +1,50 @@
-// const pg = require('pg');
+const pg = require('pg');
 
-// Postgres query template
-// const q = `SELECT id, author, depth, source, timestamp, ST_X(location) as long, ST_Y(location) as lat, elevation FROM observations WHERE
-//     ($1::text is null or location && ST_Polygon(ST_GeomFromText($1), 4326)) AND
-//     ($2::varchar[] is null or source = ANY ($2::varchar[])) AND
-//     elevation >= 0 AND
-//     timestamp > $3 AND timestamp < $4
-//     ORDER BY id
-//     OFFSET $5 * ($6 - 1)
-//     LIMIT $5
-//     `
-
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
+const pgConfig = {
+  max: 1,
+  user: process.env.SQL_USERNAME,
+  password: process.env.SQL_PASSWORD,
+  host: process.env.SQL_HOSTNAME,
+  database: process.env.SQL_DATABASE,
 }
 
+const query = `
+    SELECT id, author, depth, source, timestamp, ST_X(location) as long, ST_Y(location) as lat, elevation FROM observations WHERE
+    ($1::text is null or location && ST_Polygon(ST_GeomFromText($1), 4326)) AND
+    ($2::varchar[] is null or source = ANY ($2::varchar[])) AND
+    elevation >= 0 AND
+    ($3 is null or timestamp > $3) AND
+    ($4 is null or timestamp < $4)
+    ORDER BY id
+    OFFSET $6
+    LIMIT $5
+`
+
+let pgPool;
+
 module.exports = async (req, res) => {
-  await sleep(5000);
-  res.end("Hello, World!");
+
+  const pgParams = [
+    formatBBox(req.query.bbox) || formatReion(req.query.region), // Region
+    parseProviders(req.query.providers), // Providers
+    parseDate(req.query.startDate), // Start Date
+    parseDate(req.query.endDate), // End Date
+    parseLimit(req.query.limit), // Limit
+    parseOffset(req.query.limit, req.query.page) // Offset
+  ]
+
+  if (!pgPool) {
+    pgPool = new pg.Pool(pgConfig);
+  }
+
+  pgPool.query(query, pgParams, (err, results) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send(err);
+    } else {
+      res.send(JSON.stringify(results));
+    }
+  })
 }
 
 // exports.handler = async function(event, context, callback) {
@@ -107,20 +134,24 @@ module.exports = async (req, res) => {
 // }
 //
 // // Format list of coordinates as linestring
-// const format_region = (str) => {
-//   if (!str) return null;
-//   const polygon = str.split("_").map(x => x.replace(",", " "));
-//   console.log(polygon)
-//   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
-// };
+const formatRegion = (str) => {
+  if (!str) return null;
+  const polygon = str.split("_").map(x => x.replace(",", " "));
+  console.log(polygon)
+  return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
+};
 //
 // // Format bounding box as linestring
-// const format_bbox = (str) => {
-//   if (!str) return null;
-//   const [min_long,max_lat,max_long,min_lat] = str.split(",");
-//   const polygon = [min_long + " " + min_lat, min_long + " " + max_lat, max_long + " " + max_lat, max_long + " " + min_lat]
-//   console.log(polygon)
-//   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
-// }
+const formatBBox = (str) => {
+  if (!str) return null;
+  const [min_long,max_lat,max_long,min_lat] = str.split(",");
+  const polygon = [min_long + " " + min_lat, min_long + " " + max_lat, max_long + " " + max_lat, max_long + " " + min_lat]
+  console.log(polygon)
+  return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
+}
 //
-// const safe_split = str => str ? str.split(",") : null
+const parseProviders = providers => providers ? providers.split(",") : null
+const parseDate = date => date instanceof Date && !isNaN(date) ? date : null
+const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? "ALL" : (Number(limit) || 100)
+const parsePage = page => Math.max(Number(page), 1)
+const parseOffset = (limit, page) => (parsePage(page) - 1) * pargeOffset(limit) || null
