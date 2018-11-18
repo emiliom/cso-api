@@ -26,7 +26,7 @@ let pgPool;
 module.exports = (req, res) => {
 
   const queryParams = parse(req.url, true);
-
+  console.log(queryParams)
   const pgParams = [
     formatBBox(queryParams.bbox) || formatRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
@@ -186,7 +186,7 @@ const formatRegion = (str) => {
   console.log(polygon)
   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
 };
-//
+
 // // Format bounding box as linestring
 const formatBBox = (str) => {
   if (!str) return null;
@@ -195,7 +195,7 @@ const formatBBox = (str) => {
   console.log(polygon)
   return `LINESTRING(${polygon.concat([polygon[0]]).join(",")})`;
 }
-//
+
 const parseProviders = providers => providers ? providers.split(",") : null
 const parseDate = date => date instanceof Date && !isNaN(date) ? date : null
 const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? "ALL" : (Number(limit) || 100)
