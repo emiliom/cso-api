@@ -26,6 +26,7 @@
     { "src": "/snapshots/geojson", "dest": "/snapshots/geojson.txt"},
     { "src": "/snapshots/csv", "dest": "/snapshots/csv.txt"},
     { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
+    { "src": "/docs", "status": 301, "headers": { "Location": "/docs/v1" }},
     { "src": "/docs/v1", "dest":"/docs/v1.html"}
   ],
   "alias": ["cso.jough.in"],
