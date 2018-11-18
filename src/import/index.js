@@ -1,4 +1,3 @@
-const pg = require('pg');
 const mh = require('./mountainhub')
 const { retrieveObservations, insertObservations } = require('./observations')
 
