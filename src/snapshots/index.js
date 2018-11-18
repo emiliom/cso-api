@@ -8,6 +8,8 @@ request('https://api.communitysnowobs.org/obs?format=geojson&limit=10000').pipe(
 
 observations({limit: 'ALL', format: 'csv'})
   .then(results => {
+    console.log("RESULTS")
+    console.log(results)
     const stream = fs.createWriteStream('dist/observations.csv');
     stream.write(results);
     stream.end();
