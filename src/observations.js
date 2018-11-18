@@ -30,7 +30,7 @@ module.exports = (req, res) => {
   console.log(queryParams)
 
   const pgParams = [
-    formatBBox(queryParams.bbox) || formatReion(queryParams.region), // Region
+    formatBBox(queryParams.bbox) || formatRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
     parseDate(queryParams.startDate), // Start Date
     parseDate(queryParams.endDate), // End Date
