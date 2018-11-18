@@ -40,7 +40,7 @@ const __observations = async (queryParams) => {
     pgPool = new pg.Pool(pgConfig);
   }
 
-  results = await pgPool.query(query, pgParams) => {
+  results = await pgPool.query(query, pgParams)
   return format(results, queryParams.format);
 }
 
