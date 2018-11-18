@@ -6,7 +6,7 @@ const BASE_URL = 'https://api.mountainhub.com/timeline';
 const HEADER = { 'Accept-version': '1' };
 
 
-const rawData = async (min_timestamp, max_timestamp) => {
+const rawData = async function(min_timestamp, max_timestamp) {
 
   const args = {
     publisher : 'all',

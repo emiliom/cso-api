@@ -1,12 +1,12 @@
 const { withElevation } = require('./utils')
 const ONE_MONTH = 2592000000;
 
-const retrieveObservations = async (providers) => {
+const retrieveObservations = async function(providers) {
   const data = await Promise.all(providers.map(provider => __retrieveObservation(provider)))
   return data[0]
 }
 
-const __retrieveObservation = async (provider) => {
+const __retrieveObservation = async function(provider) {
   const rawData = await provider.rawData(new Date().getTime() - ONE_MONTH, new Date().getTime());
   let data = rawData.map(provider.parseData).filter(x => x);
   data = await withElevation(data);
@@ -31,7 +31,7 @@ const query = `
 
 let pgPool
 
-const insertObservations = async (observations) => {
+const insertObservations = async function (observations) {
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
   }
