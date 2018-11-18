@@ -1,5 +1,5 @@
 const request = require("request");
-const getObservations = require("./api/observations")
+const getObservations = require("./api/getObservations")
 const fs = require("fs")
 
 fs.mkdirSync("dist")
