@@ -2,7 +2,7 @@ const { withElevation } = require('./utils')
 const ONE_MONTH = 2592000000;
 
 const retrieveObservations = async (providers) => {
-  data = await Promise.all(providers.map(provider => __retrieveObservation(provider)))
+  const data = await Promise.all(providers.map(provider => __retrieveObservation(provider)))
   return data[0]
 }
 
