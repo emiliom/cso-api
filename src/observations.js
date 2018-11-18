@@ -1,4 +1,5 @@
 const pg = require('pg');
+const { parse } = require("url");
 
 const pgConfig = {
   max: 1,
@@ -24,16 +25,19 @@ let pgPool;
 
 module.exports = (req, res) => {
 
+  console.log(req.url)
   console.log(req.params)
   console.log(req.query)
+  const { queryParams } = parse(req.url, true);
+  console.log(queryParams)
 
   const pgParams = [
-    formatBBox(req.query.bbox) || formatReion(req.query.region), // Region
-    parseProviders(req.query.providers), // Providers
-    parseDate(req.query.startDate), // Start Date
-    parseDate(req.query.endDate), // End Date
-    parseLimit(req.query.limit), // Limit
-    parseOffset(req.query.limit, req.query.page) // Offset
+    formatBBox(queryParams.bbox) || formatReion(queryParams.region), // Region
+    parseProviders(queryParams.providers), // Providers
+    parseDate(queryParams.startDate), // Start Date
+    parseDate(queryParams.endDate), // End Date
+    parseLimit(queryParams.limit), // Limit
+    parseOffset(queryParams.limit, queryParams.page) // Offset
   ]
 
   if (!pgPool) {
