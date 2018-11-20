@@ -1,14 +1,21 @@
 const withElevation = require('./withElevation')
 const ONE_MONTH = 2592000000;
 
-module.exports = async function(providers) {
-  const data = await Promise.all(providers.map(provider => __retrieveObservation(provider)))
+module.exports = async function(providers, startDate = null, endDate = null) {
+  const data = await Promise.all(providers.map(provider => __retrieveObservation(provider, startDate, endDate)))
   return [].concat.apply([], data)
 }
 
-const __retrieveObservation = async function(provider) {
-  const rawData = await provider.rawData(new Date().getTime() - ONE_MONTH, new Date().getTime());
+const __retrieveObservation = async function(provider, startDate = null, endDate = null) {
+  startDate = parseDate(startDate) || new Date().getTime() - ONE_MONTH
+  endDate = parseDate(endDate) || new Date().getTime()
+  const rawData = await provider.rawData(startDate, endDate);
   let data = rawData.map(provider.parseData).filter(x => x);
   data = await withElevation(data);
   return data
+}
+
+const parseDate = date => {
+  date = new Date(date)
+  return date instanceof Date && !isNaN(date) ? date : null
 }
