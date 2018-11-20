@@ -38,7 +38,7 @@ const parseData = (record) => {
       timestamp: new Date(record.DtObsTime),
       lat: record.Latitude,
       long: record.Longitude,
-      depth: Number(record.Registrations[0].FullObject.SnowDepth) * 100,
+      depth: (Number(record.Registrations[0].FullObject.SnowDepth) || 0) * 100,
       source: "regObs"
     };
     console.log(format)
