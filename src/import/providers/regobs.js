@@ -42,7 +42,6 @@ const parseData = (record) => {
       depth: (Number(record.Registrations[0].FullObject.SnowDepth) || 0) * 100,
       source: "regObs"
     };
-    console.log(format)
     if (!format.depth) throw new Error("Snow Depth Undefined");
     return format;
   }
