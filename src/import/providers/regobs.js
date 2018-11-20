@@ -8,7 +8,8 @@ const rawData = async function(min_timestamp, max_timestamp) {
 
   const args = {
     FromDate : new Date(min_timestamp).toISOString().split("T")[0],
-    ToDate : new Date(max_timestamp).toISOString().split("T")[0]
+    ToDate : new Date(max_timestamp).toISOString().split("T")[0],
+    NumberOfRecords: 1000
   };
 
   try {
