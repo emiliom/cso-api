@@ -16,6 +16,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
     let offset = 0;
     let results = []
     while (true) {
+      console.log("Loop")
       const response = await axios.post(BASE_URL, {...args, offset}, {headers: HEADER});
       results = results.concat(response.data.Results)
       offset += response.data.ResultsInPage

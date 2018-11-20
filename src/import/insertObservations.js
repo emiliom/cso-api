@@ -22,6 +22,7 @@ module.exports = async function (observations) {
   }
   try {
     await pgPool.query('BEGIN');
+    console.log(observations.length)
     for (let d of observations) {
       await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
     }
