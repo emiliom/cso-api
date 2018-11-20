@@ -34,7 +34,7 @@ const parseData = (record) => {
       depth: Number(record.observation.details[0].snowpack_depth),
       source: "MountainHub"
     };
-    if (isNaN(format.depth)) throw new Error("Snow Depth Undefined");
+    if (isNaN(format.depth) || !format.depth) throw new Error("Snow Depth Undefined");
     return format;
   }
   catch (error) {

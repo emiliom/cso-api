@@ -56,7 +56,8 @@ const parseData = (record) => {
       depth: Number(record.$.heightOfSnowpack),
       source: "SnowPilot"
     };
-    if (format.lat == 0 && format.long == 0) throw new Error("No location data");
+    if (!format.depth) throw new Error("Snow Depth Undefined");
+    if (format.lat == 0 && format.long == 0) throw new Error("No Location Data");
     return format;
   } catch (error) {
     return null;
