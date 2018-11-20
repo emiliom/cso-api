@@ -32,6 +32,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
 
 const parseData = (record) => {
   try {
+    if (!record.Registrations[0].FullObject.SnowDepth) return null;
     const format = {
       author_name: record.NickName,
       id: generateId(record.RegId.toString() + record.DtObsTime),
