@@ -9,12 +9,6 @@ const pgConfig = {
   database: process.env.SQL_DATABASE,
 }
 
-const query = `
-  INSERT INTO observations(location, id, author, depth, timestamp, source, elevation)
-  VALUES %L
-  ON CONFLICT DO NOTHING
-`
-
 let pgPool;
 
 module.exports = async function (observations) {
@@ -23,9 +17,12 @@ module.exports = async function (observations) {
   }
   try {
     await pgPool.query('BEGIN');
-    console.log("length", observations.length)
-    observations = observations.map(o => [`ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236)`, o.id, o.author_name, o.depth, o.timestamp, o.source, o.elevation])
-    query = format(query, observations)
+    observations = observations.map(o => `(ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236), ${o.id}, ${o.author_name}, ${o.depth}, ${o.timestamp}, ${o.source}, ${o.elevation})`])
+    const query = `
+      INSERT INTO observations(location, id, author, depth, timestamp, source, elevation)
+      VALUES ${observations}
+      ON CONFLICT DO NOTHING
+    `
     console.log("Query", query)
     await pgPool.query(query);
     await pgPool.query('COMMIT');
