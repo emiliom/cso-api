@@ -15,7 +15,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
     let offset = 0;
     let results = []
     while (true) {
-      const response = await axios.get(BASE_URL, {params: {...args, offset}, headers: HEADER});
+      const response = await axios.post(BASE_URL, {...args, offset}, {headers: HEADER});
       results = results.concat(response.data.Results)
       offset += response.data.ResultsInPage
       if (offset >= response.data.TotalMatches) {
