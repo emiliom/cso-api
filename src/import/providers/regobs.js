@@ -32,7 +32,7 @@ const parseData = (record) => {
   try {
     const format = {
       author_name: record.NickName,
-      id: generateId(record.observation.RegId),
+      id: generateId(record.RegId),
       timestamp: new Date(record.DtObsTime),
       lat: record.Latitude,
       long: record.Longitude,
