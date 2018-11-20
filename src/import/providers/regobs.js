@@ -37,7 +37,7 @@ const parseData = (record) => {
       timestamp: new Date(record.DtObsTime),
       lat: record.Latitude,
       long: record.Longitude,
-      depth: Number(record.Registrations[0].FullObject.SnowDepth),
+      depth: Number(record.Registrations[0].FullObject.SnowDepth) * 100,
       source: "regObs"
     };
     if (isNaN(format.depth) || !format.depth) throw new Error("Snow Depth Undefined");
