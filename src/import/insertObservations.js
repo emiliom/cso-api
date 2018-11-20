@@ -17,6 +17,7 @@ const query = `
 let pgPool;
 
 module.exports = async function (observations) {
+  console.log("Inserting")
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
   }
