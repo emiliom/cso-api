@@ -40,7 +40,8 @@ const parseData = (record) => {
       depth: Number(record.Registrations[0].FullObject.SnowDepth) * 100,
       source: "regObs"
     };
-    if (isNaN(format.depth) || !format.depth) throw new Error("Snow Depth Undefined");
+    console.log(format)
+    if (!format.depth) throw new Error("Snow Depth Undefined");
     return format;
   }
   catch (error) {
