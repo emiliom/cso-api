@@ -17,7 +17,6 @@ const query = `
 let pgPool;
 
 module.exports = async function (observations) {
-  console.log("Inserting")
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
   }
@@ -31,6 +30,5 @@ module.exports = async function (observations) {
     await pgPool.query('ROLLBACK')
     return "Error"
   }
-  console.log("Success")
   return "Success"
 }
