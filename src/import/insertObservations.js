@@ -25,7 +25,9 @@ module.exports = async function (observations) {
     await pgPool.query('BEGIN');
     console.log("length", observations.length)
     observations = observations.map(o => [`ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236)`, o.id, o.author_name, o.depth, o.timestamp, o.source, o.elevation])
-    await pgPool.query(format(query, observations));
+    query = format(query, observations)
+    console.log("Query", query)
+    await pgPool.query(query);
     await pgPool.query('COMMIT');
     console.log("Done")
   } catch (e) {
