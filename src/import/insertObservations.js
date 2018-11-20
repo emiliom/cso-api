@@ -29,6 +29,7 @@ module.exports = async function (observations) {
     console.log("Done")
   } catch (e) {
     await pgPool.query('ROLLBACK')
+    console.log("Error", e)
     return "Error"
   }
   return "Success"
