@@ -22,11 +22,12 @@ module.exports = async function (observations) {
   }
   try {
     await pgPool.query('BEGIN');
-    console.log(observations.length)
+    console.log("length", observations.length)
     for (let d of observations) {
       await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
     }
     await pgPool.query('COMMIT');
+    console.log("Done")
   } catch (e) {
     await pgPool.query('ROLLBACK')
     return "Error"
