@@ -7,12 +7,17 @@ module.exports = async function(providers, startDate = null, endDate = null) {
 }
 
 const __retrieveObservation = async function(provider, startDate = null, endDate = null) {
-  startDate = parseDate(startDate) || new Date().getTime() - ONE_MONTH
-  endDate = parseDate(endDate) || new Date().getTime()
-  const rawData = await provider.rawData(startDate, endDate);
-  let data = rawData.map(provider.parseData).filter(x => x);
-  data = await withElevation(data);
-  return data
+  try {
+    startDate = parseDate(startDate) || new Date().getTime() - ONE_MONTH
+    endDate = parseDate(endDate) || new Date().getTime()
+    const rawData = await provider.rawData(startDate, endDate);
+    let data = rawData.map(provider.parseData).filter(x => x);
+    data = await withElevation(data);
+    return data
+  }
+  catch (error) {
+    return []
+  }
 }
 
 const parseDate = date => {
