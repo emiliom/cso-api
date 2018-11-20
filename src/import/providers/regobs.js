@@ -23,6 +23,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
         break
       }
     }
+    console.log("Count: ", offset)
     return results
   } catch (error) {
     return error;
