@@ -43,6 +43,7 @@ const parseData = (record) => {
     return format;
   }
   catch (error) {
+    console.log("Error")
     return null;
   }
 }
