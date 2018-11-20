@@ -1,4 +1,5 @@
 const pg = require('pg');
+const format = require('pg-format');
 
 const pgConfig = {
   max: 1,
@@ -10,7 +11,7 @@ const pgConfig = {
 
 const query = `
   INSERT INTO observations(location, id, author, depth, timestamp, source, elevation)
-  VALUES(ST_SetSRID(ST_MakePoint($1,$2), 4326), $3, $4, $5, $6, $7, $8)
+  VALUES %L
   ON CONFLICT DO NOTHING
 `
 
@@ -23,9 +24,8 @@ module.exports = async function (observations) {
   try {
     await pgPool.query('BEGIN');
     console.log("length", observations.length)
-    for (let d of observations) {
-      await pgPool.query(query, [d.long, d.lat, d.id, d.author_name, d.depth, d.timestamp, d.source, d.elevation]);
-    }
+    observations = observations.map(o => [`ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236)`, o.id, o.author_name, o.depth, o.timestamp, o.source, o.elevation])
+    await pgPool.query(format(query, observations));
     await pgPool.query('COMMIT');
     console.log("Done")
   } catch (e) {
