@@ -17,7 +17,7 @@ module.exports = async function (observations) {
   }
   try {
     await pgPool.query('BEGIN');
-    observations = observations.map(o => `(ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236), ${o.id}, ${o.author_name}, ${o.depth}, ${o.timestamp}, ${o.source}, ${o.elevation})`)
+    observations = observations.map(o => `(ST_SetSRID(ST_MakePoint(${o.long}, ${o.lat}), 4236), '${o.id}', '${o.author_name}', ${o.depth}, '${o.timestamp}', '${o.source}', ${o.elevation})`)
     const query = `
       INSERT INTO observations(location, id, author, depth, timestamp, source, elevation)
       VALUES ${observations}
