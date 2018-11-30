@@ -12,7 +12,7 @@ const pgConfig = {
 const query = `
     SELECT id, author, depth, source, timestamp, ST_X(location) as long, ST_Y(location) as lat, elevation FROM observations WHERE
     ($1::text is null or location && ST_Polygon(ST_GeomFromText($1), 4326)) AND
-    ($2::varchar[] is null or source = ANY ($2::varchar[])) AND
+    ($2::varchar[] is null or source ilike ANY ($2::varchar[])) AND
     elevation >= 0 AND
     ($3::timestamp is null or timestamp > $3) AND
     ($4::timestamp is null or timestamp < $4)

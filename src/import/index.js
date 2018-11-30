@@ -6,7 +6,6 @@ const insertObservations = require('./insertObservations')
 const { parse } = require("url");
 
 
-
 module.exports = (req, res) => {
   const queryParams = parse(req.url, true).query;
   const providers = [MountainHub, SnowPilot, RegObs]

@@ -23,13 +23,10 @@ module.exports = async function (observations) {
       VALUES ${observations}
       ON CONFLICT DO NOTHING
     `
-    console.log("Query", query)
     await pgPool.query(query);
     await pgPool.query('COMMIT');
-    console.log("Done")
   } catch (e) {
     await pgPool.query('ROLLBACK')
-    console.log("Error", e)
     return "Error"
   }
   return "Success"
