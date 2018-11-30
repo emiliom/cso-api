@@ -1,8 +1,8 @@
 const fs = require("fs")
 const __snapshot = require("./__snapshot")
 
-// fs.mkdirSync("dist")
-// fs.mkdirSync("dist/snapshot")
+fs.mkdirSync("dist")
+fs.mkdirSync("dist/snapshot")
 
 __snapshot([
   { name: "csv", params: { format: "csv" }},
