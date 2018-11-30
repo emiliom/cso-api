@@ -5,6 +5,8 @@
     "SQL_PASSWORD": "@cso-sql-password",
     "SQL_HOSTNAME": "@cso-sql-hostname",
     "SQL_DATABASE": "@cso-sql-database",
+    "SNOWPILOT_USERNAME": "@cso-snowpilot-username",
+    "SNOWPILOT_PASSWORD": "@cso-snowpilot-password",
     "ELEVATION_API_KEY": "@cso-elevation-api-key"
   },
   "build": {
@@ -16,18 +18,16 @@
     }
   },
   "builds": [
-    { "src": "src/api/v1.js", "use": "@now/node" },
+    { "src": "src/obserations/index.js", "use": "@now/node" },
     { "src": "src/import/index.js", "use": "@now/node" },
     { "src": "package.json", "use": "@now/static-build"}
   ],
   "routes": [
-    { "src": "/", "status": 301, "headers": { "Location": "/api/v1" }},
-    { "src": "/api", "status": 301, "headers": { "Location": "/api/v1" }},
-    { "src": "/api/v1", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/api/v1.js" },
+    { "src": "/observations", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/observations/index.js" },
     { "src": "/import", "dest": "/src/import/index.js" },
-    { "src": "/snapshots/geojson", "dest": "/snapshots/geojson.txt"},
-    { "src": "/snapshots/csv", "dest": "/snapshots/csv.txt"},
-    { "src": "/snapshots/json", "dest": "/snapshots/json.txt"},
+    { "src": "/snapshots/geojson", "dest": "/snapshot/geojson.txt"},
+    { "src": "/snapshots/csv", "dest": "/snapshot/csv.txt"},
+    { "src": "/snapshots/json", "dest": "/snapshot/json.txt"},
     { "src": "/docs", "status": 301, "headers": { "Location": "/docs/v1" }},
     { "src": "/docs/v1", "dest":"/docs/v1.html"}
   ],

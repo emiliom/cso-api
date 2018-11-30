@@ -1,5 +1,4 @@
 const pg = require('pg');
-const format = require('pg-format');
 
 const pgConfig = {
   max: 1,

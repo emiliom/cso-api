@@ -23,7 +23,7 @@ const query = `
 
 let pgPool;
 
-const getObservations = async (queryParams) => {
+const __observations = async (queryParams) => {
   const pgParams = [
     parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers
@@ -105,4 +105,4 @@ const parseLimit = limit => (limit && limit.toUpperCase()) == "ALL" ? null : (Nu
 const parsePage = page => Math.max(Number(page), 1)
 const parseOffset = (limit, page) => (parsePage(page) - 1) * parseLimit(limit) || null
 
-module.exports = getObservations
+module.exports = __observations

@@ -6,14 +6,15 @@
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
-    "now-build": "node src/snapshots/index.js && generate-md --layout github --input ./src/docs --output ./dist/docs"
+    "now-build": "node src/snapshot/__now.js && generate-md --layout github --input ./src/docs --output ./dist/docs",
+    "gcloud-build": "ncc build src/observations/__gcloud.js -o gcloud-builds/observations"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "crypto": "^1.0.1",
     "markdown-styles": "^3.1.10",
     "pg": "^7.6.1",
-    "pg-format": "^1.0.4",
+    "pg-native": "^3.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "url": "^0.11.0",
