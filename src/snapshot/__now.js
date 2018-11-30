@@ -15,4 +15,4 @@ __snapshot([
       stream.write(results);
       stream.end();
     })
-  })
+  });

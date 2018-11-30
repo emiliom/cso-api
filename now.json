@@ -25,9 +25,9 @@
   "routes": [
     { "src": "/observations", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations/index.js" },
     { "src": "/import", "dest": "/src/import/index.js" },
-    { "src": "/snapshots/geojson", "dest": "/snapshot/geojson.txt"},
-    { "src": "/snapshots/csv", "dest": "/snapshot/csv.txt"},
-    { "src": "/snapshots/json", "dest": "/snapshot/json.txt"},
+    { "src": "/snapshot/geojson", "dest": "/snapshot/geojson.txt"},
+    { "src": "/snapshot/csv", "dest": "/snapshot/csv.txt"},
+    { "src": "/snapshot/json", "dest": "/snapshot/json.txt"},
     { "src": "/docs", "status": 301, "headers": { "Location": "/docs/v1" }},
     { "src": "/docs/v1", "dest":"/docs/v1.html"}
   ],
