@@ -24,6 +24,7 @@ const query = `
 let pgPool;
 
 const __observations = async (queryParams) => {
+  console.log("Test", process.env.SQL_USERNAME)
   const pgParams = [
     parseBBox(queryParams.bbox) || parseRegion(queryParams.region), // Region
     parseProviders(queryParams.providers), // Providers

@@ -1,4 +1,4 @@
-const observations = require("index.js")
+const observations = require("./index.js")
 
 module.exports = {
   observations
