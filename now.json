@@ -18,12 +18,12 @@
     }
   },
   "builds": [
-    { "src": "src/obserations/index.js", "use": "@now/node" },
+    { "src": "src/observations/index.js", "use": "@now/node" },
     { "src": "src/import/index.js", "use": "@now/node" },
     { "src": "package.json", "use": "@now/static-build"}
   ],
   "routes": [
-    { "src": "/observations", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/observations/index.js" },
+    { "src": "/observations", "headers": { "cache-control": "s-maxage=31536000" }, "dest": "/src/observations/index.js" },
     { "src": "/import", "dest": "/src/import/index.js" },
     { "src": "/snapshots/geojson", "dest": "/snapshot/geojson.txt"},
     { "src": "/snapshots/csv", "dest": "/snapshot/csv.txt"},
