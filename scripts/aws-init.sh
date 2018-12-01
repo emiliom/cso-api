@@ -19,38 +19,44 @@ aws lambda delete-function --function-name snapshot
 aws lambda delete-function --function-name import
 
 # Create new functions
-aws lambda create-function --function-name observations \
---runtime nodejs8.10 \
---handler index.handler \
---role arn:aws:iam::105987315436:role/lambda-cli-role \
---zip-file fileb://aws-builds/observations/index.zip \
---timeout 60 \
---environment "$ENVIRONMENT_JSON"
+aws lambda create-function \
+  --function-name observations \
+  --runtime nodejs8.10 \
+  --handler index.handler \
+  --role arn:aws:iam::105987315436:role/lambda-cli-role \
+  --zip-file fileb://aws-builds/observations/index.zip \
+  --timeout 60 \
+  --memory-size 256 \
+  --environment "$ENVIRONMENT_JSON"
 
-aws lambda create-function --function-name snapshot \
---runtime nodejs8.10 \
---handler index.handler \
---role arn:aws:iam::105987315436:role/lambda-cli-role \
---zip-file fileb://aws-builds/snapshot/index.zip \
---timeout 60 \
---environment "$ENVIRONMENT_JSON"
+aws lambda create-function \
+  --function-name snapshot \
+  --runtime nodejs8.10 \
+  --handler index.handler \
+  --role arn:aws:iam::105987315436:role/lambda-cli-role \
+  --zip-file fileb://aws-builds/snapshot/index.zip \
+  --timeout 60 \
+  --memory-size 256 \
+  --environment "$ENVIRONMENT_JSON"
 
-aws lambda create-function --function-name import \
---runtime nodejs8.10 \
---handler index.handler \
---role arn:aws:iam::105987315436:role/lambda-cli-role \
---zip-file fileb://aws-builds/import/index.zip \
---timeout 60 \
---environment "$ENVIRONMENT_JSON"
+aws lambda create-function \
+  --function-name import \
+  --runtime nodejs8.10 \
+  --handler index.handler \
+  --role arn:aws:iam::105987315436:role/lambda-cli-role \
+  --zip-file fileb://aws-builds/import/index.zip \
+  --timeout 60 \
+  --memory-size 256 \
+  --environment "$ENVIRONMENT_JSON"
 
 # Get ARNS for scheduled events
 snapshot_arn=$(aws events put-rule \
---name snapshot \
---schedule-expression 'rate(1 hour)' | jq -r ".RuleArn")
+  --name snapshot \
+  --schedule-expression 'rate(1 hour)' | jq -r ".RuleArn")
 
 import_arn=$(aws events put-rule \
---name import \
---schedule-expression 'rate(15 minutes)' | jq -r ".RuleArn")
+  --name import \
+  --schedule-expression 'rate(15 minutes)' | jq -r ".RuleArn")
 
 # Remove existing scheduling permissions
 aws lambda remove-permission --function-name observations --statement-id observations
@@ -59,18 +65,18 @@ aws lambda remove-permission --function-name import --statement-id import
 
 # Create new scheduling permissions
 snapshot_function_arn=$(aws lambda add-permission \
---function-name snapshot \
---statement-id snapshot \
---action 'lambda:InvokeFunction' \
---principal events.amazonaws.com \
---source-arn $snapshot_arn | jq -r ".Statement" | jq -r ".Resource")
+  --function-name snapshot \
+  --statement-id snapshot \
+  --action 'lambda:InvokeFunction' \
+  --principal events.amazonaws.com \
+  --source-arn $snapshot_arn | jq -r ".Statement" | jq -r ".Resource")
 
 import_function_arn=$(aws lambda add-permission \
---function-name import \
---statement-id import \
---action 'lambda:InvokeFunction' \
---principal events.amazonaws.com \
---source-arn $import_arn | jq -r ".Statement" | jq -r ".Resource")
+  --function-name import \
+  --statement-id import \
+  --action 'lambda:InvokeFunction' \
+  --principal events.amazonaws.com \
+  --source-arn $import_arn | jq -r ".Statement" | jq -r ".Resource")
 
 # Create new schedulers
 aws events put-targets --rule snapshot --targets "Id"="1","Arn"="$snapshot_function_arn"
