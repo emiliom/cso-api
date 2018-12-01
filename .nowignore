@@ -1,2 +1,13 @@
 node_modules
+
+# Secrets
+.env*
+
+# Ignore files
+.gcloudignore
+.nowignore
+
+# Build directories
+gcloud-builds
+aws-builds
 dist

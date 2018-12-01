@@ -11,7 +11,6 @@ __snapshot([
 ])
   .then(snapshots => {
     snapshots.forEach(({name, results}) => {
-      console.log("Test")
       const stream = fs.createWriteStream(`dist/snapshot/${name}.txt`);
       stream.write(results);
       stream.end();

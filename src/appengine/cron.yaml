@@ -1,0 +1,8 @@
+cron:
+- description: Take snapshots of data
+  url: /publish/snapshot
+  schedule: every 1 hours
+
+- description: Import new data
+  url: /publish/import
+  schedule: every 15 minutes

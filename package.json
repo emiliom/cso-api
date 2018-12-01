@@ -7,15 +7,26 @@
   "license": "MIT",
   "scripts": {
     "now-build": "node src/snapshot/__now.js && generate-md --layout github --input ./src/docs --output ./dist/docs",
-    "gcloud-build": "ncc build src/observations/__gcloud.js -o gcloud-builds/observations"
+    "gcloud-build": "./builds/gcloud-build.sh",
+    "gcloud-deploy": "./builds/gcloud-deploy.sh",
+    "gcloud-init": "./builds/gcloud-init.sh",
+    "aws-build": "./builds/aws-build.sh",
+    "aws-init": "./builds/aws-init.sh",
+    "aws-deploy": "./builds/aws-deploy.sh"
   },
   "dependencies": {
+    "@google-cloud/storage": "^2.3.1",
+    "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "crypto": "^1.0.1",
+    "encoding": "^0.1.12",
+    "fast-crc32c": "^1.0.4",
     "markdown-styles": "^3.1.10",
     "pg": "^7.6.1",
+    "pg-native": "^3.0.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
+    "supports-color": "^5.5.0",
     "url": "^0.11.0",
     "xml2js": "^0.4.19"
   }

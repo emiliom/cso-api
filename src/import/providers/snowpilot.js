@@ -41,6 +41,7 @@ const rawData = async (min_timestamp, max_timestamp) => {
     }));
     return results.Pit_Data.Pit_Observation
   } catch (error) {
+    console.error(error)
     return error;
   }
 }

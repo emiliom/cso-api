@@ -1,0 +1,19 @@
+{
+  "name": "appengine",
+  "version": "1.0.0",
+  "main": "app.js",
+  "author": "Jonah Joughin",
+  "license": "MIT",
+  "engines": {
+    "node": "8.x.x"
+  },
+  "scripts": {
+    "deploy": "gcloud app deploy --quiet app.yaml cron.yaml",
+    "init": "gcloud app create",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.22.0",
+    "express": "^4.16.4"
+  }
+}

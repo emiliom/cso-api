@@ -1,15 +1,15 @@
 const withElevation = require('./withElevation')
 const ONE_MONTH = 2592000000;
 
-module.exports = async function(providers, startDate = null, endDate = null) {
+module.exports = async function(providers, startDate = undefined, endDate = undefined) {
   const data = await Promise.all(providers.map(provider => __retrieveObservation(provider, startDate, endDate)))
   return [].concat.apply([], data)
 }
 
-const __retrieveObservation = async function(provider, startDate = null, endDate = null) {
+const __retrieveObservation = async function(provider, startDate = undefined, endDate = undefined) {
   try {
-    startDate = parseDate(startDate) || new Date().getTime() - ONE_MONTH
-    endDate = parseDate(endDate) || new Date().getTime()
+    startDate = parseDate(startDate) || new Date(new Date().getTime() - ONE_MONTH)
+    endDate = parseDate(endDate) || new Date()
     const rawData = await provider.rawData(startDate, endDate);
     let data = rawData.map(provider.parseData).filter(x => x);
     data = await withElevation(data);

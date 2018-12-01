@@ -19,6 +19,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
     const response = await axios.get(BASE_URL, {params: args, headers: HEADER});
     return response.data.results;
   } catch (error) {
+    console.error(error)
     return error;
   }
 }

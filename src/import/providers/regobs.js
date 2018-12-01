@@ -25,6 +25,7 @@ const rawData = async function(min_timestamp, max_timestamp) {
     }
     return results
   } catch (error) {
+    console.error(error)
     return error;
   }
 }
