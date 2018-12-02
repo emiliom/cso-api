@@ -4,11 +4,11 @@ const { generateId } = require("../utils")
 const BASE_URL = 'https://api.nve.no/hydrology/regobs/webapi_latest/search/all';
 const HEADER = { "Content-Type": "application/json" };
 
-const rawData = async function(min_timestamp, max_timestamp) {
+const rawData = async function(min_date, max_date) {
 
   const args = {
-    FromDate : new Date(min_timestamp).toISOString().split("T")[0],
-    ToDate : new Date(max_timestamp).toISOString().split("T")[0],
+    FromDate : min_date.toISOString().split("T")[0],
+    ToDate : max_date.toISOString().split("T")[0],
     NumberOfRecords: 1000
   };
 

@@ -5,14 +5,14 @@ const BASE_URL = 'https://api.mountainhub.com/timeline';
 const HEADER = { 'Accept-version': '1' };
 
 
-const rawData = async function(min_timestamp, max_timestamp) {
+const rawData = async function(min_date, max_date) {
 
   const args = {
     publisher : 'all',
     obs_type : 'snow_conditions',
     limit : 10000,
-    since : min_timestamp,
-    before : max_timestamp
+    since : min_date.getTime(),
+    before : max_date.getTime()
   };
 
   try {

@@ -35,8 +35,8 @@ aws lambda create-function \
   --handler index.handler \
   --role arn:aws:iam::105987315436:role/lambda-cli-role \
   --zip-file fileb://aws-builds/snapshot/index.zip \
-  --timeout 60 \
-  --memory-size 256 \
+  --timeout 120 \
+  --memory-size 1024 \
   --environment "$ENVIRONMENT_JSON"
 
 aws lambda create-function \
@@ -45,8 +45,8 @@ aws lambda create-function \
   --handler index.handler \
   --role arn:aws:iam::105987315436:role/lambda-cli-role \
   --zip-file fileb://aws-builds/import/index.zip \
-  --timeout 60 \
-  --memory-size 256 \
+  --timeout 120 \
+  --memory-size 1024 \
   --environment "$ENVIRONMENT_JSON"
 
 # Get ARNS for scheduled events

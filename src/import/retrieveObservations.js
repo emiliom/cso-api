@@ -8,7 +8,7 @@ module.exports = async function(providers, startDate = undefined, endDate = unde
 
 const __retrieveObservation = async function(provider, startDate = undefined, endDate = undefined) {
   try {
-    startDate = parseDate(startDate) || new Date(new Date().getTime() - ONE_MONTH)
+    startDate = parseDate(startDate) || new Date(new Date().getTime() - ONE_MONTH/4)
     endDate = parseDate(endDate) || new Date()
     const rawData = await provider.rawData(startDate, endDate);
     let data = rawData.map(provider.parseData).filter(x => x);

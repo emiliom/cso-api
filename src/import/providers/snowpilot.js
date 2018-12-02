@@ -10,18 +10,15 @@ const HEADER = {
     'Content-Type': 'application/xml'
 }
 
-const rawData = async (min_timestamp, max_timestamp) => {
+const rawData = async (min_date, max_date) => {
 
   const jar = request.jar()
   await __setCookies(jar)
 
-  const min_date = new Date(min_timestamp).toISOString().split("T")[0]
-  const max_date = new Date(max_timestamp).toISOString().split("T")[0]
-
   const args = {
       LOC_NAME: '',
-      OBS_DATE_MIN: min_date,
-      OBS_DATE_MAX: max_date,
+      OBS_DATE_MIN: min_date.toISOString().split("T")[0],
+      OBS_DATE_MAX: max_date.toISOString().split("T")[0],
       USERNAME: '',
       AFFIL: '',
       per_page: '1000',
