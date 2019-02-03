@@ -19,5 +19,3 @@ const batch = async () => {
     let _ = await __import(startDate, endDate)
   }
 }
-
-batch()
