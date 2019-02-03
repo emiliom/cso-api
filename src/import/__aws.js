@@ -6,7 +6,7 @@ const retrieveObservations = require('./retrieveObservations')
 const insertObservations = require('./insertObservations')
 
 exports.handler = async (event, context) => {
-  const providers = [MountainHub, SnowPilot, RegObs, Cocorahs]
+  const providers = [MountainHub, SnowPilot, RegObs]
   const results = await retrieveObservations(providers)
     .then(observations => insertObservations(observations))
 }
