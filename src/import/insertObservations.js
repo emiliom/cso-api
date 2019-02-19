@@ -1,4 +1,5 @@
 const pg = require('pg');
+const escape = require('sql-escape')
 
 const pgConfig = {
   max: 1,
@@ -11,6 +12,9 @@ const pgConfig = {
 let pgPool;
 
 module.exports = async function (observations) {
+  if (!observations.length) {
+    return "Empty"
+  }
   if (!pgPool) {
     pgPool = new pg.Pool(pgConfig);
   }

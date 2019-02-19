@@ -14,12 +14,12 @@ ENVIRONMENT_JSON='
   }'
 
 # Delete existing functions
-aws lambda delete-function --function-name observations
-aws lambda delete-function --function-name snapshot
-aws lambda delete-function --function-name import
+aws --profile cso lambda delete-function --function-name observations
+aws --profile cso lambda delete-function --function-name snapshot
+aws --profile cso lambda delete-function --function-name import
 
 # Create new functions
-aws lambda create-function \
+aws --profile cso lambda create-function \
   --function-name observations \
   --runtime nodejs8.10 \
   --handler index.handler \
@@ -29,7 +29,7 @@ aws lambda create-function \
   --memory-size 256 \
   --environment "$ENVIRONMENT_JSON"
 
-aws lambda create-function \
+aws --profile cso lambda create-function \
   --function-name snapshot \
   --runtime nodejs8.10 \
   --handler index.handler \
@@ -39,7 +39,7 @@ aws lambda create-function \
   --memory-size 1024 \
   --environment "$ENVIRONMENT_JSON"
 
-aws lambda create-function \
+aws --profile cso lambda create-function \
   --function-name import \
   --runtime nodejs8.10 \
   --handler index.handler \
@@ -50,28 +50,28 @@ aws lambda create-function \
   --environment "$ENVIRONMENT_JSON"
 
 # Get ARNS for scheduled events
-snapshot_arn=$(aws events put-rule \
+snapshot_arn=$(aws --profile cso events put-rule \
   --name snapshot \
   --schedule-expression 'rate(1 hour)' | jq -r ".RuleArn")
 
-import_arn=$(aws events put-rule \
+import_arn=$(aws --profile cso events put-rule \
   --name import \
   --schedule-expression 'rate(15 minutes)' | jq -r ".RuleArn")
 
 # Remove existing scheduling permissions
-aws lambda remove-permission --function-name observations --statement-id observations
-aws lambda remove-permission --function-name snapshot --statement-id snapshot
-aws lambda remove-permission --function-name import --statement-id import
+aws --profile cso lambda remove-permission --function-name observations --statement-id observations
+aws --profile cso lambda remove-permission --function-name snapshot --statement-id snapshot
+aws --profile cso lambda remove-permission --function-name import --statement-id import
 
 # Create new scheduling permissions
-snapshot_function_arn=$(aws lambda add-permission \
+snapshot_function_arn=$(aws --profile cso lambda add-permission \
   --function-name snapshot \
   --statement-id snapshot \
   --action 'lambda:InvokeFunction' \
   --principal events.amazonaws.com \
   --source-arn $snapshot_arn | jq -r ".Statement" | jq -r ".Resource")
 
-import_function_arn=$(aws lambda add-permission \
+import_function_arn=$(aws --profile cso lambda add-permission \
   --function-name import \
   --statement-id import \
   --action 'lambda:InvokeFunction' \
@@ -79,25 +79,25 @@ import_function_arn=$(aws lambda add-permission \
   --source-arn $import_arn | jq -r ".Statement" | jq -r ".Resource")
 
 # Create new schedulers
-aws events put-targets --rule snapshot --targets "Id"="1","Arn"="$snapshot_function_arn"
-aws events put-targets --rule import --targets "Id"="1","Arn"="$import_function_arn"
+aws --profile cso events put-targets --rule snapshot --targets "Id"="1","Arn"="$snapshot_function_arn"
+aws --profile cso events put-targets --rule import --targets "Id"="1","Arn"="$import_function_arn"
 
 API_GATEWAY_ID=r21887apdb
-API_PARENT_ID=$(aws apigateway get-resources --rest-api-id $API_GATEWAY_ID | jq -r '.items[] | select(.path == "/") | .id')
+API_PARENT_ID=$(aws --profile cso apigateway get-resources --rest-api-id $API_GATEWAY_ID | jq -r '.items[] | select(.path == "/") | .id')
 REGION="us-west-2"
 ACCOUNT="105987315436"
 
-API_RESOURCE_ID=$(aws apigateway create-resource --rest-api-id $API_GATEWAY_ID \
+API_RESOURCE_ID=$(aws --profile cso apigateway create-resource --rest-api-id $API_GATEWAY_ID \
 --path-part observations \
 --parent-id $API_PARENT_ID | jq -r ".id")
 
-aws apigateway put-method \
+aws --profile cso apigateway put-method \
   --rest-api-id $API_GATEWAY_ID \
   --resource-id $API_RESOURCE_ID \
   --http-method ANY \
   --authorization-type NONE
 
-aws apigateway put-integration \
+aws --profile cso apigateway put-integration \
   --rest-api-id $API_GATEWAY_ID \
   --resource-id $API_RESOURCE_ID \
   --http-method ANY \
@@ -105,7 +105,7 @@ aws apigateway put-integration \
   --integration-http-method POST \
   --uri arn:aws:apigateway:"$REGION":lambda:path/2015-03-31/functions/arn:aws:lambda:"$REGION":"$ACCOUNT":function:observations/invocations
 
-aws lambda add-permission \
+aws --profile cso lambda add-permission \
   --function-name observations \
   --statement-id observations \
   --action 'lambda:InvokeFunction' \

@@ -9,19 +9,28 @@ const rawData = async function(min_date, max_date) {
 
   const args = {
     publisher : 'all',
-    obs_type : 'snow_conditions',
     limit : 10000,
     since : min_date.getTime(),
     before : max_date.getTime()
   };
 
+  let snow_conditions_response;
+  let snowpack_test_response;
   try {
-    const response = await axios.get(BASE_URL, {params: args, headers: HEADER});
-    return response.data.results;
+    snow_conditions_response = await axios.get(BASE_URL, {params: { ...args, obs_type: 'snow_conditions' }, headers: HEADER});
+    snow_conditions_response = snow_conditions_response.data.results
   } catch (error) {
     console.error(error)
-    return error;
+    snow_conditions_response = []
   }
+  try {
+    snowpack_test_response = await axios.get(BASE_URL, {params: { ...args, obs_type: 'snowpack_test' }, headers: HEADER});
+    snowpack_test_response = snowpack_test_response.data.results
+  } catch (error) {
+    console.error(error)
+    snowpack_test_response = []
+  }
+  return snow_conditions_response.concat(snowpack_test_response);
 }
 
 const parseData = (record) => {

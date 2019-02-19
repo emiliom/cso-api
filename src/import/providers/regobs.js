@@ -26,7 +26,7 @@ const rawData = async function(min_date, max_date) {
     return results
   } catch (error) {
     console.error(error)
-    return error;
+    return [];
   }
 }
 

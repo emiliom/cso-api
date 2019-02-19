@@ -39,7 +39,7 @@ const rawData = async (min_date, max_date) => {
     return results.Pit_Data.Pit_Observation
   } catch (error) {
     console.error(error)
-    return error;
+    return [];
   }
 }
 
