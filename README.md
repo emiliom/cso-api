@@ -1,4 +1,4 @@
-# API Docs (V1)
+# API Docs
 
 Functions running CSO's serverless [API](https://api.communitysnowobs.org/observations)
 
