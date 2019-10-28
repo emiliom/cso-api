@@ -1,0 +1,17 @@
+name: csodb
+channels:
+- conda-forge
+- digitalglobe
+dependencies:
+- python=3.7
+- jupyter
+- geopandas
+- geojson
+- gdal
+- pandas
+- folium
+- cartopy
+- sqlalchemy
+- psycopg2
+- jupyterlab 
+- pyyaml

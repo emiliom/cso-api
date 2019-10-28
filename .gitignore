@@ -4,9 +4,13 @@ node_modules
 
 *.ipynb_checkpoints
 
-# Python packages
+# Python 
 
+*.pyc
 *.egg-info
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
 
 # Secrets
 .env*
