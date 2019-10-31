@@ -6,9 +6,19 @@ def startEngine(connectionString):
    '''
 
    from sqlalchemy import create_engine
+   from sqlalchemy.engine.url import URL as dburl
 
    cs = connectionString
-   
-   engine = create_engine('postgresql://' + cs['SQL_USERNAME'] + ':' + cs['SQL_PASSWORD'] + '@' + cs['SQL_HOSTNAME'] + ':' + cs['SQL_PORT'] + '/' + cs['SQL_DATABASE'])
+
+   dbconfig = {
+    "drivername": "postgresql",
+    "username": cs['SQL_USERNAME'],
+    "password": cs['SQL_PASSWORD'],
+    "host":cs['SQL_HOSTNAME'],
+    "port": cs['SQL_PORT'],
+    "database": cs['SQL_DATABASE']
+    }
+
+   engine = create_engine(dburl(**dbconfig)) 
 
    return engine 
