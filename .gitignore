@@ -1,5 +1,17 @@
 node_modules
 
+# Jupyter notebooks
+
+*.ipynb_checkpoints
+
+# Python 
+
+*.pyc
+*.egg-info
+*/*/*/__pycache__/
+*/*/__pycache__/
+*/__pycache__/
+
 # Secrets
 .env*
 
