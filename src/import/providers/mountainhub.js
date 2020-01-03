@@ -39,9 +39,11 @@ const parseData = (record) => {
       author_name: record.actor.full_name || record.actor.fullName,
       id: generateId(record.observation._id),
       timestamp: new Date(record.observation.reported_at),
-      lat: record.observation.location[1],
-      long: record.observation.location[0],
+      lat: record.location.coordinates[1],
+      long: record.location.coordinates[0],
       depth: Number(record.observation.details[0].snowpack_depth),
+      comment: record.observation.description,
+      type: record.observation.type,
       source: "MountainHub"
     };
     if (isNaN(format.depth) || !format.depth) throw new Error("Snow Depth Undefined");
