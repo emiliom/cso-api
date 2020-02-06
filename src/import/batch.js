@@ -15,8 +15,8 @@ const __import = async (startDate, endDate) => {
 }
 // Fetch data four weeks at a time
 const batch = async () => {
-  for (var i in [...Array(13).keys()]) {
-    let startDate = new Date(new Date("2016-01-01").getTime() + i * ONE_WEEK * 4)
+  for (var i in [...Array(5).keys()]) {
+    let startDate = new Date(new Date("2019-10-01").getTime() + i * ONE_WEEK * 4)
     let endDate = new Date(startDate.getTime() + ONE_WEEK * 4)
     let _ = await __import(startDate, endDate)
   }

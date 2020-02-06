@@ -21,7 +21,7 @@ aws --profile cso lambda delete-function --function-name import
 # Create new functions
 aws --profile cso lambda create-function \
   --function-name observations \
-  --runtime nodejs8.10 \
+  --runtime nodejs12.x \
   --handler index.handler \
   --role arn:aws:iam::105987315436:role/lambda-cli-role \
   --zip-file fileb://aws-builds/observations/index.zip \
@@ -31,7 +31,7 @@ aws --profile cso lambda create-function \
 
 aws --profile cso lambda create-function \
   --function-name snapshot \
-  --runtime nodejs8.10 \
+  --runtime nodejs12.x \
   --handler index.handler \
   --role arn:aws:iam::105987315436:role/lambda-cli-role \
   --zip-file fileb://aws-builds/snapshot/index.zip \
@@ -41,7 +41,7 @@ aws --profile cso lambda create-function \
 
 aws --profile cso lambda create-function \
   --function-name import \
-  --runtime nodejs8.10 \
+  --runtime nodejs12.x \
   --handler index.handler \
   --role arn:aws:iam::105987315436:role/lambda-cli-role \
   --zip-file fileb://aws-builds/import/index.zip \

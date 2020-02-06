@@ -1,7 +1,6 @@
 const withElevation = require('./withElevation')
 const ONE_WEEK = 604800000
 
-
 module.exports = async function(providers, startDate = undefined, endDate = undefined) {
   const data = await Promise.all(providers.map(provider => __retrieveObservation(provider, startDate, endDate)))
   return [].concat.apply([], data)
