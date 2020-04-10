@@ -6,31 +6,17 @@
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
-    "now-build": "node src/snapshot/__now.js && generate-md --layout github --input ./src/docs --output ./dist/docs",
-    "gcloud-build": "./scripts/gcloud-build.sh",
-    "gcloud-deploy": "./scripts/gcloud-deploy.sh",
-    "gcloud-init": "./scripts/gcloud-init.sh",
-    "aws-build": "./scripts/aws-build.sh",
-    "aws-init": "./scripts/aws-init.sh",
-    "aws-deploy": "./scripts/aws-deploy.sh"
+    "init": "./scripts/init.sh",
+    "build": "./scripts/build.sh",
+    "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
-    "@google-cloud/storage": "^2.3.1",
+    "@zeit/ncc": "^0.22.1",
     "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
-    "crypto": "^1.0.1",
-    "dotenv": "^6.1.0",
-    "encoding": "^0.1.12",
-    "fast-crc32c": "^1.0.4",
-    "markdown-styles": "^3.1.10",
-    "ncc": "^0.3.6",
     "pg": "^7.6.1",
-    "pg-native": "^3.0.0",
-    "request": "^2.88.0",
-    "request-promise": "^4.2.2",
-    "sql-escape": "^1.0.1",
-    "supports-color": "^5.5.0",
-    "url": "^0.11.0",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
     "xml2js": "^0.4.19"
   }
 }

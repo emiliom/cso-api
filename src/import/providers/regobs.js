@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { generateId } = require("../utils")
 
-const BASE_URL = 'https://api.nve.no/hydrology/regobs/webapi_latest/search/all';
+const PROVIDER_URL = 'https://api.nve.no/hydrology/regobs/webapi_latest/search/all';
 const HEADER = { "Content-Type": "application/json" };
 
 const rawData = async function(min_date, max_date) {
@@ -16,7 +16,7 @@ const rawData = async function(min_date, max_date) {
     let offset = 0;
     let results = []
     while (true) {
-      const response = await axios.post(BASE_URL, {...args, offset}, {headers: HEADER});
+      const response = await axios.post(PROVIDER_URL, {...args, offset}, {headers: HEADER});
       results = results.concat(response.data.Results)
       offset += response.data.ResultsInPage
       if (offset >= response.data.TotalMatches) {

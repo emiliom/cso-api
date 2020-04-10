@@ -4,7 +4,7 @@ const parseString = require('xml2js').parseString;
 
 const LOGIN_URL = 'https://snowpilot.org/user/login'
 const LOGIN_HEADERS = { 'User-Agent': 'script login', withCredentials:true }
-const BASE_URL = 'https://snowpilot.org/snowpilot-query-feed.xml';
+const PROVIDER_URL = 'https://snowpilot.org/snowpilot-query-feed.xml';
 const HEADER = {
     'Content-Disposition': 'attachment; filename="query-results.xml"',
     'Content-Type': 'application/xml'
@@ -13,7 +13,7 @@ const HEADER = {
 const rawData = async (min_date, max_date) => {
 
   const jar = request.jar()
-  await __setCookies(jar)
+  await setCookies(jar)
 
   const args = {
       LOC_NAME: '',
@@ -27,7 +27,7 @@ const rawData = async (min_date, max_date) => {
 
   try {
     const response = await request.get({
-      url: BASE_URL,
+      url: PROVIDER_URL,
       qs: args,
       headers: HEADER,
       jar: jar
@@ -62,7 +62,7 @@ const parseData = (record) => {
   }
 }
 
-const __setCookies = async (jar) => {
+const setCookies = async (jar) => {
   const post_data = {
       name : process.env.SNOWPILOT_USERNAME,
       pass : process.env.SNOWPILOT_PASSWORD,

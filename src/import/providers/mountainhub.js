@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { generateId } = require("../utils")
 
-const BASE_URL = 'https://api.mountainhub.com/timeline';
+const PROVIDER_URL = 'https://api.mountainhub.com/timeline';
 const HEADER = { 'Accept-version': '1' };
 
 
@@ -17,14 +17,14 @@ const rawData = async function(min_date, max_date) {
   let snow_conditions_response;
   let snowpack_test_response;
   try {
-    snow_conditions_response = await axios.get(BASE_URL, {params: { ...args, obs_type: 'snow_conditions' }, headers: HEADER});
+    snow_conditions_response = await axios.get(PROVIDER_URL, {params: { ...args, obs_type: 'snow_conditions' }, headers: HEADER});
     snow_conditions_response = snow_conditions_response.data.results
   } catch (error) {
     console.error(error)
     snow_conditions_response = []
   }
   try {
-    snowpack_test_response = await axios.get(BASE_URL, {params: { ...args, obs_type: 'snowpack_test' }, headers: HEADER});
+    snowpack_test_response = await axios.get(PROVIDER_URL, {params: { ...args, obs_type: 'snowpack_test' }, headers: HEADER});
     snowpack_test_response = snowpack_test_response.data.results
   } catch (error) {
     console.error(error)
