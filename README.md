@@ -35,7 +35,7 @@ ELEVATION_API_KEY: {INSERT_ELEVATION_API_KEY_HERE}
 ```
 ncc run `path/to/lambda.js`
 ```
-Ex: `ncc run src/import/batch.js
+Ex: `ncc run src/import/batch.js`
 
 5. Deploy to AWS
 ```
