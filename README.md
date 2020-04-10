@@ -6,7 +6,7 @@ Functions running CSO's serverless [API](https://api.communitysnowobs.org/observ
 
 CSO's API is built on top of the AWS Lambda platform and a PostgreSQL database. The API handles data importation, exportation, and querying.
 
-### Running in development
+### Developing
 *The following steps can be followed using either yarn or npm*
 
 1. Install necessary packages
