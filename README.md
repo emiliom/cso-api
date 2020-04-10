@@ -16,26 +16,32 @@ cd src
 yarn install
 ```
 
-2. Create .env file
+2. Create .env.yaml file
 ```
-touch .env
+touch .env.yaml
 ```
 
 3. Add variables to env file. `SQL_USERNAME, SQL_PASSWORD, SQL_HOSTNAME, SQL_DATABASE` refer to the database credentials. `SNOWPILOT_PASSWORD, `SNOWPILOT_USERNAME` refer to the credentials for accessing SnowPilot's API. `ELEVATION_API_KEY` refers to a Google Maps API key with elevation permissions enabled. 
 ```
-SQL_USERNAME={INSERT_SQL_USERNAME_HERE}
-SQL_PASSWORD={INSERT_SQL_PASSWORD_HERE}
-SQL_HOSTNAME={INSERT_SQL_HOSTNAME_HERE}
-SQL_DATABASE={INSERT_SQL_DATABASE_HERE}
-SNOWPILOT_PASSWORD={INSERT_SNOWPILOT_PASSWORD_HERE}
-SNOWPILOT_USERNAME={INSERT_SNOWPILOT_USERNAME_HERE}
-ELEVATION_API_KEY={INSERT_ELEVATION_API_KEY_HERE}
+SQL_USERNAME: {INSERT_SQL_USERNAME_HERE}
+SQL_PASSWORD: {INSERT_SQL_PASSWORD_HERE}
+SQL_HOSTNAME: {INSERT_SQL_HOSTNAME_HERE}
+SQL_DATABASE: {INSERT_SQL_DATABASE_HERE}
+SNOWPILOT_PASSWORD: {INSERT_SNOWPILOT_PASSWORD_HERE}
+SNOWPILOT_USERNAME: {INSERT_SNOWPILOT_USERNAME_HERE}
+ELEVATION_API_KEY: {INSERT_ELEVATION_API_KEY_HERE}
 ```
 4. Run lambda locally
 ```
 ncc run `path/to/lambda.js`
 ```
 Ex: `ncc run src/import/batch.js
+
+5. Deploy to AWS
+```
+yarn run build
+yarn run deploy
+```
 
 ### Adding new providers
 
