@@ -1,8 +1,8 @@
 {
-  "name": "cso-api-next",
+  "name": "cso-production",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/jonahjoughin/cso-api-next.git",
+  "repository": ""https://github.com/communitysnowobs/cso-api,
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
@@ -18,5 +18,6 @@
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
     "xml2js": "^0.4.19"
-  }
+  },
+  "description": "The CSO API in MountainHub's account"
 }

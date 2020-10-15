@@ -3,10 +3,9 @@ const AWS = require('aws-sdk');
 
 // Snapshot configurations
 const configs = [
-  { name: "data.csv", params: { format: "csv", bucket: "cso-app" }},
-  { name: "data.geojson", params: { format: "geojson",  providers: "mountainhub,snowpilot,regobs", bucket: "cso-app"}},
-  { name: "data.geojson", params: { format: "geojson",  providers: "mountainhub,snowpilot,regobs", bucket: "cso-app-beta"}},
-  { name: "data.json", params: { format: "json", bucket: "cso-app" }}
+  { name: "data.csv", params: { format: "csv", bucket: "cso-app-mtn-hub" }},
+  { name: "data.geojson", params: { format: "geojson",  providers: "mountainhub,snowpilot,regobs", bucket: "cso-app-mtn-hub"}},
+  { name: "data.json", params: { format: "json", bucket: "cso-app-mtn-hub" }}
 ]
 
 const snapshot = async (templates) => {
