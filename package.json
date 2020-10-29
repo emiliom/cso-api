@@ -2,7 +2,7 @@
   "name": "cso-production",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": ""https://github.com/communitysnowobs/cso-api,
+  "repository": "https://github.com/communitysnowobs/cso-api",
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
@@ -11,7 +11,7 @@
     "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
-    "@zeit/ncc": "^0.22.1",
+    "@vercel/ncc": "^0.22.1",
     "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "pg": "^7.6.1",
