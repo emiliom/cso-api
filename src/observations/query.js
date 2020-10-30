@@ -17,7 +17,7 @@ const queryString = `
     elevation >= 0 AND
     ($3::timestamp is null or timestamp > $3) AND
     ($4::timestamp is null or timestamp < $4)
-    ORDER BY id
+    ORDER BY timestamp desc
     OFFSET $6
     LIMIT $5
 `
