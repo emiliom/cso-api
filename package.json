@@ -11,13 +11,14 @@
     "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
-    "@vercel/ncc": "^0.22.1",
+    "@vercel/ncc": "^0.24.1",
     "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "pg": "^7.6.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "yarn": "^1.22.10"
   },
   "description": "The CSO API in MountainHub's account"
 }
