@@ -14,6 +14,8 @@ node_modules
 
 # Secrets
 .env*
+env.bash
+src/import/template.yaml
 
 # Build directories
 builds

@@ -13,26 +13,26 @@ ENVIRONMENT_JSON='
     }
   }'
 
-aws --profile cso lambda update-function-code \
+aws --profile mountainhub-cso lambda update-function-code \
   --function-name observations \
   --zip-file fileb://builds/observations/index.zip
 
-aws --profile cso lambda update-function-configuration \
+aws --profile mountainhub-cso lambda update-function-configuration \
   --function-name observations \
   --environment "$ENVIRONMENT_JSON"
 
-aws --profile cso lambda update-function-code \
+aws --profile mountainhub-cso lambda update-function-code \
   --function-name snapshot \
   --zip-file fileb://builds/snapshot/index.zip
 
-aws --profile cso lambda update-function-configuration \
+aws --profile mountainhub-cso lambda update-function-configuration \
   --function-name snapshot \
   --environment "$ENVIRONMENT_JSON"
 
-aws --profile cso lambda update-function-code \
+aws --profile mountainhub-cso lambda update-function-code \
   --function-name import \
   --zip-file fileb://builds/import/index.zip
 
-aws --profile cso lambda update-function-configuration \
+aws --profile mountainhub-cso lambda update-function-configuration \
   --function-name import \
   --environment "$ENVIRONMENT_JSON"

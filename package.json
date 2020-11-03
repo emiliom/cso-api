@@ -1,8 +1,8 @@
 {
-  "name": "cso-api-next",
+  "name": "cso-api-production",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/jonahjoughin/cso-api-next.git",
+  "repository": "https://github.com/communitysnowobs/cso-api",
   "author": "Jonah Joughin <jonah@jough.in>",
   "license": "MIT",
   "scripts": {
@@ -11,12 +11,14 @@
     "deploy": "./scripts/deploy.sh"
   },
   "dependencies": {
-    "@zeit/ncc": "^0.22.1",
+    "@vercel/ncc": "^0.24.1",
     "aws-sdk": "^2.368.0",
     "axios": "^0.18.0",
     "pg": "^7.6.1",
     "request": "^2.88.2",
     "request-promise": "^4.2.5",
-    "xml2js": "^0.4.19"
-  }
+    "xml2js": "^0.4.19",
+    "yarn": "^1.22.10"
+  },
+  "description": "The CSO API in MountainHub's account"
 }
