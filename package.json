@@ -1,5 +1,5 @@
 {
-  "name": "cso-production",
+  "name": "cso-api-production",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/communitysnowobs/cso-api",
